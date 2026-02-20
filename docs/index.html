@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code Bootstrap Template</title>
+  <meta name="description" content="A ready-to-use project template with Claude Code best practices pre-configured. Agents, hooks, rules, skills, MCP servers, and permissions out of the box.">
+  <meta property="og:title" content="Claude Code Bootstrap Template">
+  <meta property="og:description" content="Skip the setup. Start building with Claude Code best practices from day one.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #09090b;
+      --surface: #111113;
+      --surface-2: #1a1a1d;
+      --border: #27272a;
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --text-faint: #52525b;
+      --accent: #22d3ee;
+      --accent-glow: rgba(34, 211, 238, 0.1);
+      --green: #34d399;
+      --blue: #38bdf8;
+      --amber: #fbbf24;
+      --rose: #fb7185;
+      --violet: #a78bfa;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --max-w: 1060px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── Container: the one source of truth ─── */
+    .w {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    @media (min-width: 768px) {
+      .w { padding-left: 40px; padding-right: 40px; }
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 80px 0 64px;
+    }
+
+    .hero-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    @media (min-width: 768px) {
+      .hero { padding: 120px 0 80px; }
+      .hero-inner {
+        flex-direction: row;
+        align-items: center;
+        gap: 56px;
+      }
+      .hero-content { flex: 1 1 0; min-width: 0; }
+      .hero-terminal { flex: 1 1 0; min-width: 0; }
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
+      padding: 5px 14px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(34, 211, 238, 0.15);
+      border-radius: 100px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent);
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5.5vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .hl {
+      background: linear-gradient(135deg, var(--accent), var(--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text-muted);
+      max-width: 38ch;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .btn-primary:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(34, 211, 238, 0.25);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: var(--text-faint);
+    }
+
+    /* ─── Terminal ─── */
+    .terminal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 12px 16px;
+      background: var(--surface-2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .terminal-dot:nth-child(1) { background: #ff5f57; }
+    .terminal-dot:nth-child(2) { background: #febc2e; }
+    .terminal-dot:nth-child(3) { background: #28c840; }
+
+    .terminal-body {
+      padding: 20px 22px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.85;
+      overflow-x: auto;
+    }
+
+    .terminal-body .c { color: var(--text-faint); }
+    .terminal-body .p { color: var(--accent); user-select: none; }
+    .terminal-body .k { color: var(--green); }
+    .terminal-body .s { color: var(--amber); font-size: 12px; }
+
+    .cursor::after {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 15px;
+      background: var(--accent);
+      margin-left: 3px;
+      vertical-align: text-bottom;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ─── TIP BANNER ─── */
+    .tip {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      padding: 36px 0;
+    }
+
+    .tip-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    @media (min-width: 600px) {
+      .tip-inner {
+        flex-direction: row;
+        gap: 24px;
+        align-items: start;
+      }
+    }
+
+    .tip-badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 4px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+      align-self: start;
+    }
+
+    .tip-body h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .tip-body p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      line-height: 1.65;
+    }
+
+    .tip-quote {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      padding: 14px 18px;
+      background: rgba(0,0,0,0.4);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      color: var(--text-muted);
+    }
+
+    /* ─── FEATURES BENTO ─── */
+    .features {
+      padding: 80px 0 96px;
+    }
+
+    @media (min-width: 768px) {
+      .features { padding: 100px 0 120px; }
+    }
+
+    .features-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .features h2 {
+      font-size: clamp(24px, 3.5vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 48px;
+    }
+
+    .bento {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 640px) {
+      .bento {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .bento-wide { grid-column: span 2; }
+    }
+
+    .bento-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .bento-item:hover {
+      border-color: var(--border-hover, #35353c);
+      transform: translateY(-1px);
+    }
+
+    .bento-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      letter-spacing: 0.05em;
+      padding: 3px 8px;
+      border-radius: 5px;
+      margin-bottom: 14px;
+    }
+
+    .tag-cyan    { background: rgba(34,211,238,0.1);  color: var(--accent); }
+    .tag-blue    { background: rgba(56,189,248,0.1);  color: var(--blue); }
+    .tag-green   { background: rgba(52,211,153,0.1);  color: var(--green); }
+    .tag-amber   { background: rgba(251,191,36,0.1);  color: var(--amber); }
+    .tag-rose    { background: rgba(251,113,133,0.1); color: var(--rose); }
+    .tag-violet  { background: rgba(167,139,250,0.1); color: var(--violet); }
+
+    .bento-item h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .bento-item p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .bento-item code {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      background: rgba(34,211,238,0.08);
+      border: 1px solid rgba(34,211,238,0.1);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: var(--accent);
+    }
+
+    /* ─── FILE TREE ─── */
+    .tree-section {
+      padding: 80px 0 96px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    @media (min-width: 768px) {
+      .tree-section { padding: 96px 0 120px; }
+    }
+
+    .tree-header {
+      margin-bottom: 32px;
+    }
+
+    .tree-header h2 {
+      font-size: clamp(22px, 3vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .tree-header p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      max-width: 480px;
+    }
+
+    pre.tree-block {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      line-height: 1.8;
+      padding: 28px 32px;
+      margin: 0;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    pre.tree-block .d { color: var(--blue); }
+    pre.tree-block .f { color: var(--text-muted); }
+    pre.tree-block .ann { color: var(--text-faint); font-style: italic; }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      padding: 40px 0 56px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 0;
+      font-size: 13px;
+      color: var(--text-faint);
+    }
+
+    .footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer a:hover { color: var(--accent); }
+
+    .footer .dot {
+      margin: 0 10px;
+      color: var(--border);
+      user-select: none;
+    }
+
+    /* ─── Mobile ─── */
+    @media (max-width: 639px) {
+      .hero { padding: 56px 0 48px; }
+      .hero h1 { font-size: 34px; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+      .terminal-body { font-size: 11px; padding: 16px 14px; }
+      .terminal-body .s { font-size: 10px; }
+      .features { padding: 60px 0 72px; }
+      .tree-section { padding: 60px 0 72px; }
+      .tree-block { font-size: 11px; padding: 18px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="w">
+      <div class="hero-inner">
+        <div class="hero-content">
+          <span class="hero-tag">Claude Code Template</span>
+          <h1>Stop configuring.<br><span class="hl">Start building.</span></h1>
+          <p class="hero-desc">A ready-to-use project template with Claude Code best practices pre-configured. Agents, hooks, rules, skills, MCP servers — all wired up.</p>
+          <div class="hero-actions">
+            <a href="https://github.com/mboss37/claude-bootstrap-template" class="btn btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              View on GitHub
+            </a>
+            <a href="#features" class="btn btn-ghost">What's included</a>
+          </div>
+        </div>
+        <div class="hero-terminal">
+          <div class="terminal">
+            <div class="terminal-bar">
+              <span class="terminal-dot"></span>
+              <span class="terminal-dot"></span>
+              <span class="terminal-dot"></span>
+            </div>
+            <div class="terminal-body"><span class="c"># Clone the template</span>
+<span class="p">$ </span><span class="k">git clone</span> <span class="s">github.com/.../claude-bootstrap-template</span> my-project
+<span class="p">$ </span><span class="k">cd</span> my-project
+
+<span class="c"># Fresh start</span>
+<span class="p">$ </span><span class="k">rm</span> -rf .git && <span class="k">git</span> init
+
+<span class="c"># Let Claude reconfigure for your project</span>
+<span class="p">$ </span><span class="k cursor">claude</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tip -->
+  <section class="tip">
+    <div class="w">
+      <div class="tip-inner">
+        <span class="tip-badge">Pro tip</span>
+        <div class="tip-body">
+          <h3>Let Claude reconfigure the template for you</h3>
+          <p>Claude understands all the config formats natively. Describe your project and stack — it rewrites CLAUDE.md, rules, agents, and settings in seconds. Faster and more consistent than editing by hand.</p>
+          <div class="tip-quote">"This is a Go + HTMX app with PostgreSQL. Reconfigure everything for my stack."</div>
+        <p style="font-size:12px; color:var(--text-faint); margin-top:8px; margin-bottom:0;">Example prompt — adapt to your own stack and project.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="w">
+      <div class="features-label">What's included</div>
+      <h2>Eight features, pre-configured</h2>
+
+      <div class="bento">
+
+        <div class="bento-item bento-wide">
+          <span class="bento-tag tag-cyan">01</span>
+          <h3>CLAUDE.md — Project Memory</h3>
+          <p>Persistent instructions loaded every session. Your stack, conventions, commands, and architecture — Claude remembers it all. The single most important file in any Claude Code project.</p>
+        </div>
+
+        <div class="bento-item">
+          <span class="bento-tag tag-blue">02</span>
+          <h3>TASKS.md — Task Tracker</h3>
+          <p>Sprint tracker with session logs. Claude knows what was done, what's in progress, and what's next.</p>
+        </div>
+
+        <div class="bento-item">
+          <span class="bento-tag tag-green">03</span>
+          <h3>Agents — Sub-Agents</h3>
+          <p>Specialized personas with scoped tools. Code reviewer, debugger — consistent behavior. Via <code>.claude/agents/</code>.</p>
+        </div>
+
+        <div class="bento-item bento-wide">
+          <span class="bento-tag tag-amber">04</span>
+          <h3>Rules — Path-Scoped Conventions</h3>
+          <p>Conventions that activate only when relevant. Included rules for database, TypeScript, and Rust are examples — replace or add your own to match your stack. Only loaded when editing matching files.</p>
+        </div>
+
+        <div class="bento-item">
+          <span class="bento-tag tag-cyan">05</span>
+          <h3>Skills — Slash Commands</h3>
+          <p><code>/deploy</code>, <code>/db-migration</code>, <code>/wrap-up</code> — example skills included as starting points. Customize or replace them for your workflow.</p>
+        </div>
+
+        <div class="bento-item">
+          <span class="bento-tag tag-rose">06</span>
+          <h3>Hooks — Event-Driven Automation</h3>
+          <p>Auto-format on every edit, block dangerous commands, desktop notifications. Zero-effort guardrails.</p>
+        </div>
+
+        <div class="bento-item">
+          <span class="bento-tag tag-violet">07</span>
+          <h3>Settings — Permissions</h3>
+          <p>Explicit allow/deny for tools. <code>rm -rf</code>, <code>sudo</code>, <code>.env</code> writes — blocked by default.</p>
+        </div>
+
+        <div class="bento-item">
+          <span class="bento-tag tag-green">08</span>
+          <h3>MCP Servers — Integrations</h3>
+          <p>Context7, Playwright, Sequential Thinking. External tools pre-wired in <code>.mcp.json</code>.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- File tree -->
+  <section class="tree-section">
+    <div class="w">
+      <div class="tree-header">
+        <h2>Project structure</h2>
+        <p>What ships in the template. Customize via Claude — describe your stack and let it adapt everything.</p>
+      </div>
+<pre class="tree-block">
+<span class="d">claude-bootstrap-template/</span>
+├── <span class="f">CLAUDE.md</span>                          <span class="ann"># project memory — loaded every session</span>
+├── <span class="f">TASKS.md</span>                           <span class="ann"># sprint tracker — read at session start</span>
+├── <span class="f">LICENSE</span>
+├── <span class="d">.claude/</span>
+│   ├── <span class="f">settings.json</span>                  <span class="ann"># permissions, hooks, denied patterns</span>
+│   ├── <span class="d">agents/</span>
+│   │   ├── <span class="f">code-reviewer.md</span>           <span class="ann"># security-first code review</span>
+│   │   └── <span class="f">debugger.md</span>                <span class="ann"># systematic bug diagnosis</span>
+│   ├── <span class="d">hooks/</span>
+│   │   ├── <span class="f">auto-format.sh</span>             <span class="ann"># prettier, rustfmt, pg_format</span>
+│   │   ├── <span class="f">security-check.sh</span>          <span class="ann"># blocks dangerous commands</span>
+│   │   └── <span class="f">notify.sh</span>                  <span class="ann"># macOS desktop notifications</span>
+│   ├── <span class="d">rules/</span>
+│   │   ├── <span class="f">database.md</span>                <span class="ann"># scoped to migrations + SQL</span>
+│   │   ├── <span class="f">nextjs.md</span>                  <span class="ann"># scoped to .ts/.tsx/.js/.jsx</span>
+│   │   └── <span class="f">rust.md</span>                    <span class="ann"># scoped to .rs files</span>
+│   └── <span class="d">skills/</span>
+│       ├── <span class="d">db-migration/</span><span class="f">SKILL.md</span>      <span class="ann"># /db-migration command</span>
+│       ├── <span class="d">deploy/</span><span class="f">SKILL.md</span>            <span class="ann"># /deploy command</span>
+│       └── <span class="d">wrap-up/</span><span class="f">SKILL.md</span>           <span class="ann"># /wrap-up command</span>
+├── <span class="f">.mcp.json</span>                          <span class="ann"># Context7 + Playwright + Sequential Thinking</span>
+└── <span class="f">.gitignore</span>
+</pre>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="w">
+      <div class="footer-inner">
+        <span>Built on the <a href="https://github.com/FlorianBruniaux/claude-code-ultimate-guide/blob/main/guide/ultimate-guide.md">Claude Code Ultimate Guide</a> by <a href="https://github.com/FlorianBruniaux">Florian Bruniaux</a></span>
+        <span class="dot">&middot;</span>
+        <span>MIT License</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
