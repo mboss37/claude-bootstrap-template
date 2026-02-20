@@ -511,6 +511,40 @@
     </div>
   </section>
 
+  <!-- File tree -->
+  <section class="tree-section">
+    <div class="w">
+      <div class="tree-header">
+        <h2>Project structure</h2>
+        <p>What ships in the template. Customize via Claude — describe your stack and let it adapt everything.</p>
+      </div>
+<pre class="tree-block">
+<span class="d">claude-bootstrap-template/</span>
+├── <span class="f">CLAUDE.md</span>                          <span class="ann"># project memory — loaded every session</span>
+├── <span class="f">TASKS.md</span>                           <span class="ann"># sprint tracker — read at session start</span>
+├── <span class="f">LICENSE</span>
+├── <span class="d">.claude/</span>
+│   ├── <span class="f">settings.json</span>                  <span class="ann"># permissions, hooks, denied patterns</span>
+│   ├── <span class="d">agents/</span>
+│   │   ├── <span class="f">code-reviewer.md</span>           <span class="ann"># security-first code review</span>
+│   │   └── <span class="f">debugger.md</span>                <span class="ann"># systematic bug diagnosis</span>
+│   ├── <span class="d">hooks/</span>
+│   │   ├── <span class="f">auto-format.sh</span>             <span class="ann"># prettier, pg_format</span>
+│   │   ├── <span class="f">security-check.sh</span>          <span class="ann"># blocks dangerous commands</span>
+│   │   └── <span class="f">notify.sh</span>                  <span class="ann"># macOS desktop notifications</span>
+│   ├── <span class="d">rules/</span>
+│   │   ├── <span class="f">database.md</span>                <span class="ann"># scoped to migrations + SQL</span>
+│   │   └── <span class="f">nextjs.md</span>                  <span class="ann"># scoped to .ts/.tsx/.js/.jsx</span>
+│   └── <span class="d">skills/</span>
+│       ├── <span class="d">db-migration/</span><span class="f">SKILL.md</span>      <span class="ann"># /db-migration command</span>
+│       ├── <span class="d">deploy/</span><span class="f">SKILL.md</span>            <span class="ann"># /deploy command</span>
+│       └── <span class="d">wrap-up/</span><span class="f">SKILL.md</span>           <span class="ann"># /wrap-up command</span>
+├── <span class="f">.mcp.json</span>                          <span class="ann"># Context7 + Playwright + Sequential Thinking</span>
+└── <span class="f">.gitignore</span>
+</pre>
+    </div>
+  </section>
+
   <!-- Features -->
   <section class="features" id="features">
     <div class="w">
@@ -568,40 +602,6 @@
         </div>
 
       </div>
-    </div>
-  </section>
-
-  <!-- File tree -->
-  <section class="tree-section">
-    <div class="w">
-      <div class="tree-header">
-        <h2>Project structure</h2>
-        <p>What ships in the template. Customize via Claude — describe your stack and let it adapt everything.</p>
-      </div>
-<pre class="tree-block">
-<span class="d">claude-bootstrap-template/</span>
-├── <span class="f">CLAUDE.md</span>                          <span class="ann"># project memory — loaded every session</span>
-├── <span class="f">TASKS.md</span>                           <span class="ann"># sprint tracker — read at session start</span>
-├── <span class="f">LICENSE</span>
-├── <span class="d">.claude/</span>
-│   ├── <span class="f">settings.json</span>                  <span class="ann"># permissions, hooks, denied patterns</span>
-│   ├── <span class="d">agents/</span>
-│   │   ├── <span class="f">code-reviewer.md</span>           <span class="ann"># security-first code review</span>
-│   │   └── <span class="f">debugger.md</span>                <span class="ann"># systematic bug diagnosis</span>
-│   ├── <span class="d">hooks/</span>
-│   │   ├── <span class="f">auto-format.sh</span>             <span class="ann"># prettier, pg_format</span>
-│   │   ├── <span class="f">security-check.sh</span>          <span class="ann"># blocks dangerous commands</span>
-│   │   └── <span class="f">notify.sh</span>                  <span class="ann"># macOS desktop notifications</span>
-│   ├── <span class="d">rules/</span>
-│   │   ├── <span class="f">database.md</span>                <span class="ann"># scoped to migrations + SQL</span>
-│   │   └── <span class="f">nextjs.md</span>                  <span class="ann"># scoped to .ts/.tsx/.js/.jsx</span>
-│   └── <span class="d">skills/</span>
-│       ├── <span class="d">db-migration/</span><span class="f">SKILL.md</span>      <span class="ann"># /db-migration command</span>
-│       ├── <span class="d">deploy/</span><span class="f">SKILL.md</span>            <span class="ann"># /deploy command</span>
-│       └── <span class="d">wrap-up/</span><span class="f">SKILL.md</span>           <span class="ann"># /wrap-up command</span>
-├── <span class="f">.mcp.json</span>                          <span class="ann"># Context7 + Playwright + Sequential Thinking</span>
-└── <span class="f">.gitignore</span>
-</pre>
     </div>
   </section>
 
