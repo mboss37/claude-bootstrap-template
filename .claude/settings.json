@@ -20,7 +20,6 @@
       "Write(src/**)",
       "Write(tests/**)",
       "Write(*.md)",
-      "Write(*.toml)",
       "Write(*.json)",
       "Write(*.yml)",
       "Write(*.yaml)",

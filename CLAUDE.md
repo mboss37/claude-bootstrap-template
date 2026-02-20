@@ -5,7 +5,7 @@
 
 ## Stack
 <!-- TODO: List your tech stack. Examples: -->
-<!-- - **Backend**: Node.js / Python / Rust / Go -->
+<!-- - **Backend**: Node.js / Python / Go -->
 <!-- - **Frontend**: Next.js / React / Vue -->
 <!-- - **Database**: PostgreSQL / MongoDB / SQLite -->
 <!-- - **ORM**: Prisma / Drizzle / SQLAlchemy -->

@@ -63,8 +63,7 @@ Then tell Claude:
 │   │   └── notify.sh                # macOS notification on attention needed
 │   ├── rules/
 │   │   ├── database.md              # DB conventions (path-scoped to migrations/SQL)
-│   │   ├── nextjs.md                # TypeScript/frontend conventions (path-scoped to .ts/.tsx)
-│   │   └── rust.md                  # Rust conventions (path-scoped to .rs)
+│   │   └── nextjs.md                # TypeScript/frontend conventions (path-scoped to .ts/.tsx)
 │   └── skills/
 │       ├── db-migration/SKILL.md    # /db-migration slash command
 │       ├── deploy/SKILL.md          # /deploy slash command
@@ -156,7 +155,7 @@ tools:                        # Allowed tools (scoped access)
 
 **What they are.** Rules are Markdown files in `.claude/rules/` that are automatically loaded when Claude works on files matching specific glob patterns. Unlike CLAUDE.md (which is always loaded), rules only activate when relevant — keeping context lean.
 
-**Why they matter.** In a polyglot project, you don't want Rust conventions cluttering Claude's context when it's editing TypeScript. Path-scoped rules solve this: database rules activate only when touching migration files, frontend rules only when editing `.ts`/`.tsx`, etc. This is both more efficient (less token waste) and more precise (no conflicting conventions).
+**Why they matter.** In a polyglot project, you don't want database conventions cluttering Claude's context when it's editing TypeScript. Path-scoped rules solve this: database rules activate only when touching migration files, frontend rules only when editing `.ts`/`.tsx`, etc. This is both more efficient (less token waste) and more precise (no conflicting conventions).
 
 **How they work.** Each rule file has YAML frontmatter with `paths` globs:
 
@@ -179,7 +178,6 @@ paths:
 |---|---|---|
 | `database.md` | `prisma/**`, `**/migrations/**`, `**/*.sql` | Never modify committed migrations, UUIDs for PKs, TIMESTAMPTZ, snake_case naming |
 | `nextjs.md` | `**/*.ts`, `**/*.tsx`, `**/*.js`, `**/*.jsx` | Strict TS, App Router, server components by default, Zod validation |
-| `rust.md` | `**/*.rs` | thiserror/anyhow, no .unwrap() outside tests, doc comments on public items |
 
 ---
 
@@ -252,7 +250,7 @@ Hooks are configured in `settings.json` and point to scripts in `.claude/hooks/`
 | Hook | Event | What it does |
 |---|---|---|
 | `security-check.sh` | PreToolUse (Bash) | Blocks `rm -rf /`, `DROP TABLE`, `curl\|bash`, `sudo rm`, `TRUNCATE`, `git push --force`, `git reset --hard`, `chmod 777`, and more |
-| `auto-format.sh` | PostToolUse (Write/Edit) | Runs `rustfmt` on `.rs`, `prettier` on `.ts/.tsx/.js/.jsx/.json`, `pg_format` on `.sql` |
+| `auto-format.sh` | PostToolUse (Write/Edit) | Runs `prettier` on `.ts/.tsx/.js/.jsx/.json`, `pg_format` on `.sql` |
 | `notify.sh` | Notification | macOS desktop notification + system sound (macOS only — replace with `notify-send` on Linux) |
 
 A PreToolUse hook that exits with code 2 **blocks the tool call entirely** — this is how `security-check.sh` prevents dangerous commands from ever executing.
@@ -330,7 +328,7 @@ The fastest and most consistent way to customize this template is to **tell Clau
 
 Example prompts after cloning:
 
-> "My project is a Go + HTMX web app with SQLite. Reconfigure everything — remove Rust/Next.js rules, update CLAUDE.md with my stack, adjust settings.json permissions for Go tooling."
+> "My project is a Go + HTMX web app with SQLite. Reconfigure everything — update CLAUDE.md with my stack, replace rules, and adjust settings.json permissions for Go tooling."
 
 > "Add a Python rule file for my FastAPI backend. It should enforce type hints, async/await patterns, and Pydantic models for validation."
 
