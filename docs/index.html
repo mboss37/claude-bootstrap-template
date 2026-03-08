@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claude Code Bootstrap Template</title>
-  <meta name="description" content="A minimal project template for Claude Code. Pairs with Everything Claude Code for 16 agents, 65 skills, and production-ready hooks.">
-  <meta property="og:title" content="Claude Code Bootstrap Template">
+  <title>Claude Launchpad</title>
+  <meta name="description" content="A minimal project template for Claude Code. Pairs with Everything Claude Code for 16 agents, 65+ skills, and production-ready hooks.">
+  <meta property="og:title" content="Claude Launchpad">
   <meta property="og:description" content="Project memory + ECC plugin = production-grade Claude Code setup in minutes.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,29 +44,20 @@
       overflow-x: hidden;
     }
 
-    /* Ambient background */
-    .bg-glow {
-      position: fixed; inset: 0;
-      pointer-events: none; z-index: 0;
-    }
+    .bg-glow { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
     .bg-glow::before {
-      content: '';
-      position: absolute; top: -200px; left: 50%;
-      transform: translateX(-50%);
+      content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
       width: 900px; height: 600px;
       background: radial-gradient(ellipse, rgba(34,211,238,0.07) 0%, transparent 70%);
     }
     .bg-glow::after {
-      content: '';
-      position: absolute; bottom: 0; left: 50%;
-      transform: translateX(-50%);
+      content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
       width: 800px; height: 500px;
       background: radial-gradient(ellipse, rgba(52,211,153,0.04) 0%, transparent 70%);
     }
 
     .bg-grid {
-      position: fixed; inset: 0;
-      pointer-events: none; z-index: 0;
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
       background-image:
         linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
@@ -75,7 +66,7 @@
       -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 20%, black 20%, transparent 100%);
     }
 
-    section, div, footer, header { position: relative; z-index: 1; }
+    section, div, footer, header, nav { position: relative; z-index: 1; }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -87,22 +78,38 @@
     .anim-d3 { animation-delay: 0.28s; }
     .anim-d4 { animation-delay: 0.4s; }
 
-    .w {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding-left: 24px; padding-right: 24px;
+    .w { max-width: var(--max-w); margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+    @media (min-width: 768px) { .w { padding-left: 40px; padding-right: 40px; } }
+
+    /* ─── NAV ─── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(9,9,11,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); padding: 12px 0;
     }
-    @media (min-width: 768px) {
-      .w { padding-left: 40px; padding-right: 40px; }
+    .nav-inner {
+      display: flex; align-items: center; gap: 8px;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav a {
+      font-size: 12px; font-weight: 500; color: var(--text-faint);
+      text-decoration: none; white-space: nowrap;
+      padding: 6px 12px; border-radius: 6px;
+      transition: all 0.15s;
+    }
+    .nav a:hover { color: var(--text); background: var(--surface-2); }
+    .nav-brand {
+      font-weight: 700; color: var(--text-muted) !important;
+      margin-right: 8px; font-size: 13px !important;
     }
 
-    /* Hero */
+    /* ─── HERO ─── */
     .hero { padding: 80px 0 64px; }
-    .hero-inner {
-      display: flex; flex-direction: column; gap: 48px;
-    }
+    .hero-inner { display: flex; flex-direction: column; gap: 48px; }
     @media (min-width: 768px) {
-      .hero { padding: 120px 0 80px; }
+      .hero { padding: 100px 0 72px; }
       .hero-inner { flex-direction: row; align-items: center; gap: 56px; }
       .hero-content { flex: 1 1 0; min-width: 0; }
       .hero-terminal { flex: 1 1 0; min-width: 0; }
@@ -110,19 +117,13 @@
 
     .hero-tag {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 20px;
-      padding: 5px 14px;
-      background: var(--accent-glow);
-      border: 1px solid rgba(34,211,238,0.15);
-      border-radius: 100px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 20px; padding: 5px 14px;
+      background: var(--accent-glow); border: 1px solid rgba(34,211,238,0.15); border-radius: 100px;
     }
     .hero-tag::before {
-      content: ''; width: 6px; height: 6px;
-      border-radius: 50%; background: var(--accent);
-      box-shadow: 0 0 8px var(--accent);
-      animation: pulse 2s ease-in-out infinite;
+      content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+      box-shadow: 0 0 8px var(--accent); animation: pulse 2s ease-in-out infinite;
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; box-shadow: 0 0 8px var(--accent); }
@@ -130,289 +131,304 @@
     }
 
     .hero h1 {
-      font-size: clamp(36px, 5.5vw, 56px);
-      font-weight: 800; letter-spacing: -0.04em;
-      line-height: 1; margin-bottom: 20px;
+      font-size: clamp(36px, 5.5vw, 56px); font-weight: 800;
+      letter-spacing: -0.04em; line-height: 1; margin-bottom: 20px;
     }
     .hero h1 .hl {
       background: linear-gradient(135deg, var(--accent) 0%, var(--green) 50%, var(--blue) 100%);
       background-size: 200% 200%;
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
       animation: shimmer 6s ease-in-out infinite;
     }
-    @keyframes shimmer {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
+    @keyframes shimmer { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
-    .hero-desc {
-      font-size: 16px; color: var(--text-muted);
-      max-width: 42ch; margin-bottom: 32px; line-height: 1.7;
-    }
-
+    .hero-desc { font-size: 16px; color: var(--text-muted); max-width: 42ch; margin-bottom: 32px; line-height: 1.7; }
     .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
-    /* Buttons */
+    /* ─── BUTTONS ─── */
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 12px 22px; font-size: 14px; font-weight: 600;
-      font-family: var(--font-sans); text-decoration: none;
-      border-radius: 10px;
-      transition: all 0.25s cubic-bezier(0.4,0,0.2,1);
-      cursor: pointer;
+      font-family: var(--font-sans); text-decoration: none; border-radius: 10px;
+      transition: all 0.25s cubic-bezier(0.4,0,0.2,1); cursor: pointer;
     }
     .btn-primary { background: var(--accent); color: var(--bg); }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(34,211,238,0.3), 0 0 0 1px rgba(34,211,238,0.2);
-    }
-    .btn-ghost {
-      background: transparent; color: var(--text-muted);
-      border: 1px solid var(--border);
-    }
-    .btn-ghost:hover {
-      color: var(--text); border-color: var(--text-faint);
-      transform: translateY(-2px);
-    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(34,211,238,0.3); }
+    .btn-ghost { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
+    .btn-ghost:hover { color: var(--text); border-color: var(--text-faint); transform: translateY(-2px); }
 
-    /* Terminal */
+    /* ─── TERMINAL ─── */
     .terminal-wrap {
       position: relative; border-radius: 14px; padding: 1px;
       background: linear-gradient(135deg, rgba(34,211,238,0.2), rgba(52,211,153,0.1), var(--border));
     }
-    .terminal {
-      background: var(--surface); border-radius: 13px; overflow: hidden;
-    }
+    .terminal { background: var(--surface); border-radius: 13px; overflow: hidden; }
     .terminal-bar {
       display: flex; align-items: center; gap: 7px;
-      padding: 12px 16px; background: var(--surface-2);
-      border-bottom: 1px solid var(--border);
+      padding: 12px 16px; background: var(--surface-2); border-bottom: 1px solid var(--border);
     }
     .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
     .terminal-dot:nth-child(1) { background: #ff5f57; }
     .terminal-dot:nth-child(2) { background: #febc2e; }
     .terminal-dot:nth-child(3) { background: #28c840; }
-
     .terminal-body {
-      padding: 20px 22px; margin: 0;
-      font-family: var(--font-mono); font-size: 13px;
-      line-height: 1.85; overflow-x: auto;
-      background: var(--surface); color: var(--text);
+      padding: 20px 22px; margin: 0; font-family: var(--font-mono); font-size: 13px;
+      line-height: 1.85; overflow-x: auto; background: var(--surface); color: var(--text);
     }
     .terminal-body .c { color: var(--text-faint); }
     .terminal-body .p { color: var(--accent); user-select: none; }
     .terminal-body .k { color: var(--green); }
     .terminal-body .s { color: var(--amber); font-size: 12px; }
-
     .cursor::after {
-      content: ''; display: inline-block;
-      width: 8px; height: 15px;
-      background: var(--accent); margin-left: 3px;
-      vertical-align: text-bottom;
+      content: ''; display: inline-block; width: 8px; height: 15px;
+      background: var(--accent); margin-left: 3px; vertical-align: text-bottom;
       animation: blink 1s step-end infinite;
     }
     @keyframes blink { 50% { opacity: 0; } }
 
-    /* Tip banner */
+    /* ─── TIP ─── */
     .tip {
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
-      padding: 40px 0;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%); padding: 40px 0;
     }
     .tip-inner { display: flex; flex-direction: column; gap: 16px; }
-    @media (min-width: 600px) {
-      .tip-inner { flex-direction: row; gap: 24px; align-items: start; }
-    }
+    @media (min-width: 600px) { .tip-inner { flex-direction: row; gap: 24px; align-items: start; } }
     .tip-badge {
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--bg); background: var(--accent);
-      padding: 4px 12px; border-radius: 4px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--bg); background: var(--accent); padding: 4px 12px; border-radius: 4px;
       white-space: nowrap; align-self: start;
     }
     .tip-body h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
     .tip-body p { font-size: 14px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.65; }
     .tip-quote {
-      font-family: var(--font-mono); font-size: 13px;
-      padding: 14px 18px; background: rgba(0,0,0,0.4);
-      border-left: 3px solid var(--accent);
-      border-radius: 6px; color: var(--text-muted);
-      margin-bottom: 8px;
+      font-family: var(--font-mono); font-size: 13px; padding: 14px 18px;
+      background: rgba(0,0,0,0.4); border-left: 3px solid var(--accent);
+      border-radius: 6px; color: var(--text-muted); margin-bottom: 8px;
     }
     .tip-note { font-size: 12px; color: var(--text-faint); margin-top: 0; margin-bottom: 0; }
 
-    /* Gradient divider */
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent), var(--green), transparent);
-      opacity: 0.2;
-    }
+    /* ─── DIVIDER ─── */
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--accent), var(--green), transparent); opacity: 0.2; }
 
-    /* Two-layer section */
-    .layers { padding: 80px 0 96px; }
-    @media (min-width: 768px) { .layers { padding: 96px 0 120px; } }
-    .layers-label {
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 0.2em; text-transform: uppercase;
+    /* ─── SECTION COMMON ─── */
+    .sec { padding: 80px 0; }
+    .sec-alt { background: var(--surface); }
+    @media (min-width: 768px) { .sec { padding: 96px 0; } }
+    .sec-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--accent); margin-bottom: 10px;
     }
-    .layers h2 {
-      font-size: clamp(24px, 3.5vw, 34px);
-      font-weight: 700; letter-spacing: -0.03em; margin-bottom: 48px;
+    .sec-label-green { color: var(--green); }
+    .sec-label-amber { color: var(--amber); }
+    .sec-label-rose { color: var(--rose); }
+    .sec-label-violet { color: var(--violet); }
+    .sec-label-blue { color: var(--blue); }
+    .sec h2 {
+      font-size: clamp(24px, 3.5vw, 34px); font-weight: 700;
+      letter-spacing: -0.03em; margin-bottom: 12px;
+    }
+    .sec > .w > p.sec-desc {
+      font-size: 14px; color: var(--text-muted); line-height: 1.65;
+      max-width: 560px; margin-bottom: 40px;
     }
 
+    /* ─── TWO-LAYER CARDS ─── */
     .layer-grid { display: grid; gap: 16px; grid-template-columns: 1fr; }
-    @media (min-width: 640px) {
-      .layer-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    @media (min-width: 640px) { .layer-grid { grid-template-columns: repeat(2, 1fr); } }
 
     .layer-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 14px; padding: 28px;
-      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-      position: relative; overflow: hidden;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 28px;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;
     }
     .layer-card::after {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 2px;
-      opacity: 0; transition: opacity 0.3s;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; opacity: 0; transition: opacity 0.3s;
     }
-    .layer-card:hover {
-      border-color: rgba(34,211,238,0.15);
-      transform: translateY(-3px);
-      box-shadow: 0 16px 48px rgba(0,0,0,0.25);
-    }
+    .layer-card:hover { border-color: rgba(34,211,238,0.15); transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.25); }
     .layer-card:hover::after { opacity: 1; }
     .layer-card:nth-child(1)::after { background: linear-gradient(90deg, var(--accent), transparent); }
     .layer-card:nth-child(2)::after { background: linear-gradient(90deg, var(--green), transparent); }
 
-    .layer-card .tag {
-      display: inline-block; font-size: 10px; font-weight: 600;
-      font-family: var(--font-mono); letter-spacing: 0.05em;
-      padding: 3px 8px; border-radius: 5px; margin-bottom: 14px;
+    .tag {
+      display: inline-block; font-size: 10px; font-weight: 600; font-family: var(--font-mono);
+      letter-spacing: 0.05em; padding: 3px 8px; border-radius: 5px; margin-bottom: 14px;
     }
     .tag-cyan { background: rgba(34,211,238,0.1); color: var(--accent); }
     .tag-green { background: rgba(52,211,153,0.1); color: var(--green); }
+    .tag-amber { background: rgba(251,191,36,0.1); color: var(--amber); }
+    .tag-rose { background: rgba(251,113,133,0.1); color: var(--rose); }
+    .tag-violet { background: rgba(167,139,250,0.1); color: var(--violet); }
+    .tag-blue { background: rgba(56,189,248,0.1); color: var(--blue); }
 
     .layer-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
     .layer-card p { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 12px; }
-    .layer-card ul {
-      list-style: none; padding: 0;
-      font-size: 13px; color: var(--text-muted);
-    }
-    .layer-card ul li {
-      padding: 4px 0; padding-left: 18px; position: relative;
-    }
-    .layer-card ul li::before {
-      content: ''; position: absolute; left: 0; top: 12px;
-      width: 6px; height: 6px; border-radius: 50%;
-    }
+    .layer-card ul { list-style: none; padding: 0; font-size: 13px; color: var(--text-muted); }
+    .layer-card ul li { padding: 4px 0; padding-left: 18px; position: relative; }
+    .layer-card ul li::before { content: ''; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; }
     .layer-card:nth-child(1) ul li::before { background: var(--accent); }
     .layer-card:nth-child(2) ul li::before { background: var(--green); }
-    .layer-card code {
+
+    code {
       font-family: var(--font-mono); font-size: 11px;
-      background: rgba(34,211,238,0.08);
-      border: 1px solid rgba(34,211,238,0.1);
-      padding: 1px 6px; border-radius: 4px;
-      color: var(--accent);
+      background: rgba(34,211,238,0.08); border: 1px solid rgba(34,211,238,0.1);
+      padding: 1px 6px; border-radius: 4px; color: var(--accent);
     }
 
-    /* Stack examples */
-    .stacks {
-      padding: 80px 0 96px;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
+    /* ─── SETUP STEPS ─── */
+    .setup-steps { display: flex; flex-direction: column; gap: 0; }
+    .setup-step {
+      display: flex; gap: 20px; padding: 28px 0;
+      border-bottom: 1px solid rgba(39,39,42,0.5);
     }
-    @media (min-width: 768px) { .stacks { padding: 96px 0 120px; } }
-    .stacks-label {
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--green); margin-bottom: 10px;
+    .setup-step:last-child { border-bottom: none; }
+    .setup-num {
+      flex-shrink: 0; width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 700; color: var(--bg);
+      background: var(--accent); border-radius: 10px;
     }
-    .stacks h2 {
-      font-size: clamp(22px, 3vw, 28px);
-      font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px;
+    .setup-body { flex: 1; min-width: 0; }
+    .setup-body h3 { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+    .setup-body p { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 12px; }
+    .setup-code {
+      font-family: var(--font-mono); font-size: 12.5px; line-height: 1.7;
+      padding: 16px 20px; margin: 0 0 8px 0;
+      background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+      overflow-x: auto; color: var(--text-muted);
     }
-    .stacks > .w > p {
-      font-size: 14px; color: var(--text-muted);
-      line-height: 1.65; max-width: 520px; margin-bottom: 40px;
+    .setup-note {
+      font-size: 12px !important; color: var(--text-faint) !important;
+      margin-bottom: 0 !important;
+    }
+    @media (max-width: 639px) {
+      .setup-step { flex-direction: column; gap: 12px; }
+      .setup-num { width: 30px; height: 30px; font-size: 13px; }
+      .setup-code { font-size: 11px; padding: 12px 14px; }
     }
 
+    /* ─── DOC TABLE ─── */
+    .doc-table {
+      width: 100%; border-collapse: collapse; margin-bottom: 32px;
+      font-size: 13px; line-height: 1.55;
+    }
+    .doc-table thead th {
+      text-align: left; padding: 10px 14px; font-weight: 600; font-size: 11px;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint);
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-table tbody td {
+      padding: 12px 14px; border-bottom: 1px solid rgba(39,39,42,0.5);
+      color: var(--text-muted); vertical-align: top;
+    }
+    .doc-table tbody tr:hover td { background: rgba(255,255,255,0.02); }
+    .doc-table .name { color: var(--text); font-weight: 500; white-space: nowrap; }
+    .doc-table .model { font-family: var(--font-mono); font-size: 11px; }
+    .doc-table .model-opus { color: var(--violet); }
+    .doc-table .model-sonnet { color: var(--blue); }
+    .doc-table .model-haiku { color: var(--green); }
+    .doc-table .cmd {
+      font-family: var(--font-mono); font-size: 12px;
+      color: var(--accent); background: rgba(34,211,238,0.06);
+      padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(34,211,238,0.08);
+      white-space: nowrap;
+    }
+
+    /* ─── DOC GROUP ─── */
+    .doc-group { margin-bottom: 40px; }
+    .doc-group h3 {
+      font-size: 16px; font-weight: 600; margin-bottom: 16px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    }
+    .doc-group-desc {
+      font-size: 13px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.65;
+    }
+
+    /* ─── WORKFLOW DIAGRAM ─── */
+    .workflow {
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+      margin-bottom: 40px; padding: 24px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 12px;
+    }
+    .workflow-step {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 500;
+      padding: 8px 14px; border-radius: 8px;
+      background: rgba(0,0,0,0.3); border: 1px solid var(--border);
+    }
+    .workflow-step code { font-size: 11px; }
+    .workflow-arrow { color: var(--text-faint); font-size: 16px; }
+
+    /* ─── HOOK CARD ─── */
+    .hook-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .hook-grid { grid-template-columns: repeat(2, 1fr); } }
+    .hook-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+    }
+    .hook-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+    .hook-card p { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin: 0; }
+    .hook-event {
+      font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+      padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; display: inline-block;
+    }
+    .hook-pre { background: rgba(251,191,36,0.1); color: var(--amber); }
+    .hook-post { background: rgba(52,211,153,0.1); color: var(--green); }
+    .hook-stop { background: rgba(167,139,250,0.1); color: var(--violet); }
+
+    /* ─── RULE CARDS ─── */
+    .rule-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .rule-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 900px) { .rule-grid { grid-template-columns: repeat(3, 1fr); } }
+    .rule-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px;
+    }
+    .rule-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+    .rule-card .rule-files {
+      font-size: 12px; color: var(--text-faint); margin-bottom: 8px;
+    }
+    .rule-card ul { list-style: none; padding: 0; font-size: 13px; color: var(--text-muted); }
+    .rule-card ul li { padding: 3px 0; padding-left: 14px; position: relative; }
+    .rule-card ul li::before {
+      content: ''; position: absolute; left: 0; top: 10px;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--text-faint);
+    }
+
+    /* ─── STACK CARDS ─── */
     .stack-grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
-    @media (min-width: 640px) {
-      .stack-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
+    @media (min-width: 640px) { .stack-grid { grid-template-columns: repeat(2, 1fr); } }
     .stack-card {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 12px; padding: 24px;
+      background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px;
       transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
     }
-    .stack-card:hover {
-      border-color: rgba(255,255,255,0.08);
-      transform: translateY(-2px);
-    }
+    .stack-card:hover { border-color: rgba(255,255,255,0.08); transform: translateY(-2px); }
     .stack-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
-    .stack-card .stack-tech {
-      font-size: 13px; color: var(--text-muted); line-height: 1.6;
-      margin-bottom: 12px;
-    }
+    .stack-card .stack-tech { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px; }
     .stack-card .stack-prompt {
-      font-family: var(--font-mono); font-size: 11px;
-      padding: 10px 14px; background: rgba(0,0,0,0.4);
-      border-left: 2px solid var(--text-faint);
-      border-radius: 4px; color: var(--text-faint);
-      line-height: 1.6;
+      font-family: var(--font-mono); font-size: 11px; padding: 10px 14px;
+      background: rgba(0,0,0,0.4); border-left: 2px solid var(--text-faint);
+      border-radius: 4px; color: var(--text-faint); line-height: 1.6;
     }
-    .stack-card .stack-rules {
-      font-size: 12px; color: var(--text-faint); margin-top: 10px;
-    }
+    .stack-card .stack-rules { font-size: 12px; color: var(--text-faint); margin-top: 10px; }
     .stack-card .stack-rules code {
-      font-family: var(--font-mono); font-size: 11px;
-      background: rgba(52,211,153,0.08);
-      border: 1px solid rgba(52,211,153,0.1);
-      padding: 1px 6px; border-radius: 4px;
-      color: var(--green);
+      background: rgba(52,211,153,0.08); border: 1px solid rgba(52,211,153,0.1); color: var(--green);
     }
 
-    /* File tree */
-    .tree-section {
-      padding: 80px 0 96px;
-      border-top: 1px solid var(--border);
-    }
-    @media (min-width: 768px) { .tree-section { padding: 96px 0 120px; } }
-    .tree-header { margin-bottom: 32px; }
-    .tree-header h2 {
-      font-size: clamp(22px, 3vw, 28px);
-      font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px;
-    }
-    .tree-header p {
-      font-size: 14px; color: var(--text-muted);
-      line-height: 1.65; max-width: 480px;
-    }
+    /* ─── FILE TREE ─── */
     pre.tree-block {
-      font-family: var(--font-mono); font-size: 13px;
-      line-height: 1.8; padding: 28px 32px; margin: 0;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 12px; overflow-x: auto;
+      font-family: var(--font-mono); font-size: 13px; line-height: 1.8;
+      padding: 28px 32px; margin: 0; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 12px; overflow-x: auto;
     }
     pre.tree-block .d { color: var(--blue); }
     pre.tree-block .f { color: var(--text-muted); }
     pre.tree-block .ann { color: var(--text-faint); font-style: italic; }
 
-    /* Footer */
+    /* ─── FOOTER ─── */
     .footer { padding: 40px 0 56px; border-top: 1px solid var(--border); }
-    .footer-inner {
-      display: flex; flex-wrap: wrap;
-      gap: 6px 0; font-size: 13px; color: var(--text-faint);
-    }
+    .footer-inner { display: flex; flex-wrap: wrap; gap: 6px 0; font-size: 13px; color: var(--text-faint); }
     .footer a { color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
     .footer a:hover { color: var(--accent); }
     .footer .dot { margin: 0 10px; color: var(--border); user-select: none; }
 
-    /* Mobile */
+    /* ─── MOBILE ─── */
     @media (max-width: 639px) {
       .hero { padding: 56px 0 48px; }
       .hero h1 { font-size: 34px; }
@@ -420,9 +436,13 @@
       .hero-actions .btn { width: 100%; justify-content: center; }
       .terminal-body { font-size: 11px; padding: 16px 14px; }
       .terminal-body .s { font-size: 10px; }
-      .layers, .stacks, .tree-section { padding: 60px 0 72px; }
+      .sec { padding: 60px 0; }
       pre.tree-block { font-size: 11px; padding: 18px 16px; }
       .footer-inner { flex-direction: column; gap: 8px; }
+      .doc-table { font-size: 12px; }
+      .doc-table thead th, .doc-table tbody td { padding: 8px 8px; }
+      .workflow { flex-direction: column; align-items: stretch; }
+      .workflow-arrow { transform: rotate(90deg); align-self: center; }
     }
   </style>
 </head>
@@ -431,20 +451,37 @@
   <div class="bg-glow"></div>
   <div class="bg-grid"></div>
 
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="w">
+      <div class="nav-inner">
+        <a href="#" class="nav-brand">Claude Launchpad</a>
+        <a href="#setup">Setup</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#agents">Agents</a>
+        <a href="#commands">Commands</a>
+        <a href="#skills">Skills</a>
+        <a href="#hooks">Hooks</a>
+        <a href="#rules">Rules</a>
+        <a href="#stacks">Stacks</a>
+      </div>
+    </div>
+  </nav>
+
   <!-- Hero -->
   <section class="hero">
     <div class="w">
       <div class="hero-inner">
         <div class="hero-content">
-          <span class="hero-tag anim">Bootstrap Template</span>
+          <span class="hero-tag anim">Claude Launchpad</span>
           <h1 class="anim anim-d1">Clone. Configure.<br><span class="hl">Start building.</span></h1>
-          <p class="hero-desc anim anim-d2">A minimal project template that pairs with Everything Claude Code. Project memory + 16 agents, 65 skills, and production-ready hooks in minutes. Works with any stack.</p>
+          <p class="hero-desc anim anim-d2">A minimal project template that pairs with Everything Claude Code. Project memory + 16 agents, 65+ skills, and production-ready hooks in minutes. Works with any stack.</p>
           <div class="hero-actions anim anim-d3">
-            <a href="https://github.com/mboss37/claude-bootstrap-template" class="btn btn-primary">
+            <a href="https://github.com/mboss37/claude-launchpad" class="btn btn-primary">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
               View on GitHub
             </a>
-            <a href="#how-it-works" class="btn btn-ghost">How it works</a>
+            <a href="#setup" class="btn btn-ghost">Setup guide</a>
           </div>
         </div>
         <div class="hero-terminal anim anim-d4">
@@ -496,13 +533,113 @@
 
   <div class="divider"></div>
 
-  <!-- Two layers -->
-  <section class="layers" id="how-it-works">
+  <!-- Setup Guide -->
+  <section class="sec sec-alt" id="setup">
     <div class="w">
-      <div class="layers-label">How it works</div>
-      <h2>Two layers, one setup</h2>
+      <div class="sec-label">Setup guide</div>
+      <h2>From zero to production-ready in 5 minutes</h2>
+      <p class="sec-desc">Everything installs through the Claude Code CLI. No manual config files to write.</p>
 
-      <div class="layer-grid">
+      <div class="setup-steps">
+
+        <div class="setup-step">
+          <div class="setup-num">1</div>
+          <div class="setup-body">
+            <h3>Clone the template</h3>
+            <p>This gives you <code>CLAUDE.md</code>, <code>TASKS.md</code>, and <code>.gitignore</code> &mdash; the project-specific layer that ECC doesn't provide.</p>
+            <pre class="setup-code">git clone https://github.com/mboss37/claude-launchpad.git my-project
+cd my-project
+rm -rf .git && git init</pre>
+          </div>
+        </div>
+
+        <div class="setup-step">
+          <div class="setup-num">2</div>
+          <div class="setup-body">
+            <h3>Install the ECC plugin</h3>
+            <p>This installs all <strong>16 agents, 65+ skills, 40+ commands, and 20 hooks</strong> in one shot. Run these inside Claude Code:</p>
+            <pre class="setup-code"># Start Claude Code
+claude
+
+# Add the marketplace and install
+&gt; /plugin marketplace add affaan-m/everything-claude-code
+&gt; /plugin install everything-claude-code@everything-claude-code
+
+# Restart Claude Code to load the plugin
+&gt; /exit
+claude</pre>
+            <p class="setup-note">You'll be prompted to choose scope: <strong>user</strong> (all projects), <strong>project</strong> (collaborators), or <strong>local</strong> (you only, this repo).</p>
+            <p class="setup-note" style="margin-top: 6px;"><strong style="color: var(--text-muted);">Note:</strong> Plugins are runtime extensions &mdash; they don't copy files into your project. After restart, all skills, agents, hooks, and commands are available automatically. You won't see them in your <code>.claude/</code> folder, and that's correct. They live in <code>~/.claude/plugins/</code>.</p>
+          </div>
+        </div>
+
+        <div class="setup-step">
+          <div class="setup-num">3</div>
+          <div class="setup-body">
+            <h3>Install language rules</h3>
+            <p>Rules are conventions that load automatically based on file type. Pick the language(s) for your project. This installs common rules (9 files) plus language-specific rules (5 files each).</p>
+            <pre class="setup-code"># Clone the ECC repo (just for the install script)
+git clone https://github.com/affaan-m/everything-claude-code.git /tmp/ecc
+
+# Install rules for your language(s)
+cd /tmp/ecc && ./install.sh &lt;language&gt;
+
+# Options:
+#   ./install.sh typescript        # Next.js, React, Node.js
+#   ./install.sh python            # FastAPI, Django, Flask
+#   ./install.sh golang            # Go projects
+#   ./install.sh swift             # iOS/macOS
+#   ./install.sh typescript python # Multiple languages</pre>
+            <p class="setup-note">Rules install to <code>~/.claude/rules/</code> (global). They apply to all your projects.</p>
+          </div>
+        </div>
+
+        <div class="setup-step">
+          <div class="setup-num">4</div>
+          <div class="setup-body">
+            <h3>Configure CLAUDE.md for your stack</h3>
+            <p>Open <code>CLAUDE.md</code> and fill in the TODO sections &mdash; or just tell Claude your stack and let it do it:</p>
+            <pre class="setup-code"># Start Claude Code
+claude
+
+# Tell it your stack
+&gt; "I'm building a SaaS app with Next.js, shadcn/ui, and Supabase.
+   Fill in CLAUDE.md for this stack."</pre>
+            <p class="setup-note">Claude rewrites the stack, architecture, commands, project structure, and conventions sections automatically.</p>
+          </div>
+        </div>
+
+        <div class="setup-step">
+          <div class="setup-num">5</div>
+          <div class="setup-body">
+            <h3>Start building</h3>
+            <p>You now have the full ECC toolkit. Use slash commands to drive your workflow:</p>
+            <pre class="setup-code">&gt; /plan "Build user authentication with email/password and OAuth"
+# Creates a phased plan, waits for your confirmation
+
+&gt; /tdd
+# Writes tests first, then implements
+
+&gt; /verify pre-commit
+# Runs build + lint + tests + security checks
+
+&gt; /code-review
+# Reviews all uncommitted changes</pre>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- How it works -->
+  <section class="sec" id="how-it-works">
+    <div class="w">
+      <div class="sec-label">How it works</div>
+      <h2>Two layers, one setup</h2>
+      <div class="layer-grid" style="margin-top: 36px;">
         <div class="layer-card">
           <span class="tag tag-cyan">This template</span>
           <h3>Project-specific layer</h3>
@@ -510,18 +647,19 @@
           <ul>
             <li><code>CLAUDE.md</code> &mdash; stack, architecture, commands, conventions</li>
             <li><code>TASKS.md</code> &mdash; sprint tracker with session continuity</li>
+            <li><code>.env.example</code> &mdash; required environment variables</li>
             <li><code>.gitignore</code> &mdash; sensible defaults</li>
           </ul>
         </div>
-
         <div class="layer-card">
           <span class="tag tag-green">ECC Plugin</span>
           <h3>Agent toolkit layer</h3>
           <p>Production-grade agents, skills, hooks, and rules. Installed as a plugin, managed separately.</p>
           <ul>
             <li><strong>16 agents</strong> &mdash; planner, architect, TDD, code review, security</li>
-            <li><strong>65+ skills</strong> &mdash; <code>/plan</code>, <code>/tdd</code>, <code>/security-scan</code>, <code>/e2e</code></li>
-            <li><strong>40+ commands</strong> &mdash; slash commands for common workflows</li>
+            <li><strong>65+ skills</strong> &mdash; patterns, workflows, and framework guides</li>
+            <li><strong>40+ commands</strong> &mdash; slash commands for every workflow</li>
+            <li><strong>20 hooks</strong> &mdash; auto-format, type check, security gates</li>
             <li><strong>Per-language rules</strong> &mdash; TypeScript, Python, Go, Swift</li>
           </ul>
         </div>
@@ -531,12 +669,500 @@
 
   <div class="divider"></div>
 
-  <!-- Stack examples -->
-  <section class="stacks">
+  <!-- Typical workflow -->
+  <section class="sec sec-alt">
     <div class="w">
-      <div class="stacks-label">Adapt to any stack</div>
+      <div class="sec-label sec-label-green">Typical workflow</div>
+      <h2>How a feature gets built</h2>
+      <p class="sec-desc">ECC enforces a structured development pipeline. Each phase uses specialized agents and commands.</p>
+
+      <div class="workflow">
+        <div class="workflow-step"><code>/plan</code> Plan</div>
+        <span class="workflow-arrow">&rarr;</span>
+        <div class="workflow-step"><code>/tdd</code> Write tests</div>
+        <span class="workflow-arrow">&rarr;</span>
+        <div class="workflow-step">Implement</div>
+        <span class="workflow-arrow">&rarr;</span>
+        <div class="workflow-step"><code>/verify</code> Verify</div>
+        <span class="workflow-arrow">&rarr;</span>
+        <div class="workflow-step"><code>/code-review</code> Review</div>
+        <span class="workflow-arrow">&rarr;</span>
+        <div class="workflow-step">Commit</div>
+      </div>
+
+      <p style="font-size: 13px; color: var(--text-faint); line-height: 1.65;">
+        <strong style="color: var(--text-muted);">1. Plan</strong> &mdash; <code>/plan</code> restates requirements, identifies risks, and creates a phased implementation plan. Waits for your confirmation before any code is written.<br>
+        <strong style="color: var(--text-muted);">2. Test first</strong> &mdash; <code>/tdd</code> scaffolds interfaces and writes failing tests (RED), then implements minimal code to pass (GREEN), then refactors (IMPROVE). Targets 80%+ coverage.<br>
+        <strong style="color: var(--text-muted);">3. Implement</strong> &mdash; Write the feature. ECC hooks auto-format your code, run type checks, and warn about console.log statements as you work.<br>
+        <strong style="color: var(--text-muted);">4. Verify</strong> &mdash; <code>/verify</code> runs build, type check, lint, tests, and console.log audit in one command. Supports <code>quick</code>, <code>full</code>, <code>pre-commit</code>, and <code>pre-pr</code> modes.<br>
+        <strong style="color: var(--text-muted);">5. Review</strong> &mdash; <code>/code-review</code> checks for security vulnerabilities, code quality, performance issues, and missing tests.<br>
+        <strong style="color: var(--text-muted);">6. Commit</strong> &mdash; Conventional commits enforced by rules. Hooks remind you to review before pushing.
+      </p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Agents -->
+  <section class="sec" id="agents">
+    <div class="w">
+      <div class="sec-label">16 Agents</div>
+      <h2>Specialized sub-agents for every task</h2>
+      <p class="sec-desc">Each agent has a focused role, specific model, and scoped tool access. Claude delegates to them automatically or you can invoke them directly.</p>
+
+      <div class="doc-group">
+        <h3>Core Development</h3>
+        <p class="doc-group-desc">The agents you'll use on every feature. These activate automatically based on what you're doing.</p>
+        <table class="doc-table">
+          <thead><tr><th>Agent</th><th>Model</th><th>Purpose</th><th>When it activates</th></tr></thead>
+          <tbody>
+            <tr><td class="name">Planner</td><td class="model model-opus">Opus</td><td>Creates phased implementation plans with risk assessment</td><td>Complex features, refactoring, architectural changes</td></tr>
+            <tr><td class="name">Architect</td><td class="model model-opus">Opus</td><td>System design, scalability analysis, technical trade-offs</td><td>New system design, architectural decisions</td></tr>
+            <tr><td class="name">TDD Guide</td><td class="model model-sonnet">Sonnet</td><td>Enforces test-first methodology (RED &rarr; GREEN &rarr; REFACTOR)</td><td>New features, bug fixes, refactoring</td></tr>
+            <tr><td class="name">Code Reviewer</td><td class="model model-sonnet">Sonnet</td><td>Security-first review: vulnerabilities, quality, performance</td><td>After any code is written or modified</td></tr>
+            <tr><td class="name">Security Reviewer</td><td class="model model-sonnet">Sonnet</td><td>OWASP Top 10, secrets detection, input validation, auth checks</td><td>Code handling user input, auth, APIs, sensitive data</td></tr>
+            <tr><td class="name">Build Error Resolver</td><td class="model model-sonnet">Sonnet</td><td>Fixes build/type errors with minimal surgical changes</td><td>When build fails or type errors occur</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="doc-group">
+        <h3>Testing &amp; Quality</h3>
+        <table class="doc-table">
+          <thead><tr><th>Agent</th><th>Model</th><th>Purpose</th><th>When it activates</th></tr></thead>
+          <tbody>
+            <tr><td class="name">E2E Runner</td><td class="model model-sonnet">Sonnet</td><td>Generates and runs Playwright tests, captures screenshots/videos/traces</td><td>Critical user flows, regression testing</td></tr>
+            <tr><td class="name">Refactor Cleaner</td><td class="model model-sonnet">Sonnet</td><td>Detects and removes dead code, duplicates, unused dependencies</td><td>Code maintenance, cleanup sprints</td></tr>
+            <tr><td class="name">Doc Updater</td><td class="model model-haiku">Haiku</td><td>Updates READMEs, codemaps, and architectural documentation</td><td>After significant code changes</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="doc-group">
+        <h3>Language-Specific</h3>
+        <p class="doc-group-desc">Specialized reviewers that enforce idiomatic patterns for each language.</p>
+        <table class="doc-table">
+          <thead><tr><th>Agent</th><th>Model</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td class="name">Python Reviewer</td><td class="model model-sonnet">Sonnet</td><td>PEP 8, Pythonic idioms, type hints, security</td></tr>
+            <tr><td class="name">Go Reviewer</td><td class="model model-sonnet">Sonnet</td><td>Idiomatic Go, concurrency patterns, error handling</td></tr>
+            <tr><td class="name">Go Build Resolver</td><td class="model model-sonnet">Sonnet</td><td>Go compilation errors, go vet, linter issues</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="doc-group">
+        <h3>Advanced</h3>
+        <table class="doc-table">
+          <thead><tr><th>Agent</th><th>Model</th><th>Purpose</th></tr></thead>
+          <tbody>
+            <tr><td class="name">Database Reviewer</td><td class="model model-sonnet">Sonnet</td><td>PostgreSQL query optimization, schema design, RLS, Supabase best practices</td></tr>
+            <tr><td class="name">Chief of Staff</td><td class="model model-opus">Opus</td><td>Triage communications across email, Slack, LINE, Messenger</td></tr>
+            <tr><td class="name">Harness Optimizer</td><td class="model model-sonnet">Sonnet</td><td>Optimize agent harness configuration for reliability and cost</td></tr>
+            <tr><td class="name">Loop Operator</td><td class="model model-sonnet">Sonnet</td><td>Run and monitor autonomous agent loops, detect stalls, handle recovery</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Commands -->
+  <section class="sec sec-alt" id="commands">
+    <div class="w">
+      <div class="sec-label sec-label-amber">40+ Commands</div>
+      <h2>Slash commands for every workflow</h2>
+      <p class="sec-desc">Type these directly in Claude Code. They trigger structured, repeatable workflows.</p>
+
+      <div class="doc-group">
+        <h3>Essential (use daily)</h3>
+        <table class="doc-table">
+          <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><span class="cmd">/plan</span></td><td>Restate requirements, assess risks, create step-by-step implementation plan. <strong>Waits for confirmation</strong> before writing code.</td></tr>
+            <tr><td><span class="cmd">/tdd</span></td><td>Scaffold interfaces, write failing tests first, implement minimal code to pass, refactor. Enforces 80%+ coverage.</td></tr>
+            <tr><td><span class="cmd">/verify</span></td><td>Build + type check + lint + tests + console.log audit in one command. Modes: <code>quick</code>, <code>full</code>, <code>pre-commit</code>, <code>pre-pr</code>.</td></tr>
+            <tr><td><span class="cmd">/code-review</span></td><td>Comprehensive review of uncommitted changes. Checks security, quality, performance, missing tests.</td></tr>
+            <tr><td><span class="cmd">/build-fix</span></td><td>Incrementally fix build and type errors one at a time with minimal changes.</td></tr>
+            <tr><td><span class="cmd">/e2e</span></td><td>Generate and run Playwright end-to-end tests. Captures screenshots, videos, and traces.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="doc-group">
+        <h3>Code Quality</h3>
+        <table class="doc-table">
+          <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><span class="cmd">/security-scan</span></td><td>Scan Claude Code config for vulnerabilities, misconfigurations, and injection risks (AgentShield).</td></tr>
+            <tr><td><span class="cmd">/refactor-clean</span></td><td>Safely remove dead code with test verification. Categorizes into SAFE/CAUTION/DANGER tiers.</td></tr>
+            <tr><td><span class="cmd">/checkpoint</span></td><td>Create and verify workflow checkpoints. Track test pass rates and coverage over time.</td></tr>
+            <tr><td><span class="cmd">/python-review</span></td><td>Python-specific review: PEP 8, type hints, security, idioms.</td></tr>
+            <tr><td><span class="cmd">/go-review</span></td><td>Go-specific review: idiomatic patterns, concurrency, error handling.</td></tr>
+            <tr><td><span class="cmd">/go-test</span></td><td>Go testing with table-driven tests and race detection.</td></tr>
+            <tr><td><span class="cmd">/go-build</span></td><td>Fix Go build errors, go vet, and linter issues.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="doc-group">
+        <h3>Learning &amp; Skills</h3>
+        <table class="doc-table">
+          <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><span class="cmd">/learn-eval</span></td><td>Extract reusable patterns from the current session. Self-evaluates quality before saving.</td></tr>
+            <tr><td><span class="cmd">/skill-create</span></td><td>Analyze git history to extract coding patterns and generate SKILL.md files.</td></tr>
+            <tr><td><span class="cmd">/instinct-status</span></td><td>Show learned instincts (project + global) with confidence scores.</td></tr>
+            <tr><td><span class="cmd">/instinct-export</span></td><td>Export instincts for sharing across projects.</td></tr>
+            <tr><td><span class="cmd">/instinct-import</span></td><td>Import instincts from file or URL.</td></tr>
+            <tr><td><span class="cmd">/configure-ecc</span></td><td>Interactive installer &mdash; select and configure which ECC components to enable.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="doc-group">
+        <h3>Documentation &amp; Maintenance</h3>
+        <table class="doc-table">
+          <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><span class="cmd">/update-docs</span></td><td>Auto-update documentation to match current codebase.</td></tr>
+            <tr><td><span class="cmd">/update-codemaps</span></td><td>Regenerate code maps and dependency graphs.</td></tr>
+            <tr><td><span class="cmd">/skill-stocktake</span></td><td>Audit installed skills for quality. Quick scan (changed only) or full stocktake.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Skills -->
+  <section class="sec" id="skills">
+    <div class="w">
+      <div class="sec-label sec-label-rose">65+ Skills</div>
+      <h2>Framework guides, patterns, and workflows</h2>
+      <p class="sec-desc">Skills are context-aware knowledge packs. They activate when relevant or can be loaded explicitly. Organized by category.</p>
+
+      <div class="doc-group">
+        <h3>Backend &amp; API</h3>
+        <p class="doc-group-desc">Architecture patterns, API design, database optimization, and server-side best practices.</p>
+        <table class="doc-table">
+          <thead><tr><th>Skill</th><th>What it covers</th></tr></thead>
+          <tbody>
+            <tr><td class="name">api-design</td><td>REST resource naming, status codes, pagination, filtering, error responses, versioning, rate limiting</td></tr>
+            <tr><td class="name">backend-patterns</td><td>Repository pattern, service layer, middleware, caching, error handling, auth</td></tr>
+            <tr><td class="name">postgres-patterns</td><td>Query optimization, schema design, indexing, RLS, Supabase best practices</td></tr>
+            <tr><td class="name">database-migrations</td><td>Safe schema changes, data migrations, rollbacks, zero-downtime (Prisma, Drizzle, Django, golang-migrate)</td></tr>
+            <tr><td class="name">docker-patterns</td><td>Multi-stage builds, Compose, networking, volumes, container security</td></tr>
+            <tr><td class="name">deployment-patterns</td><td>Rolling, blue-green, canary deploys, CI/CD, health checks, rollback strategies</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="doc-group">
+        <h3>Frontend &amp; UI</h3>
+        <table class="doc-table">
+          <thead><tr><th>Skill</th><th>What it covers</th></tr></thead>
+          <tbody>
+            <tr><td class="name">frontend-patterns</td><td>React/Next.js patterns, state management, performance, forms, component architecture</td></tr>
+            <tr><td class="name">coding-standards</td><td>Universal TypeScript/JavaScript/React/Node.js standards and best practices</td></tr>
+            <tr><td class="name">e2e-testing</td><td>Playwright patterns, Page Object Model, CI/CD integration, flaky test strategies</td></tr>
+            <tr><td class="name">frontend-slides</td><td>Create animation-rich HTML presentations from scratch or from PowerPoint</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="doc-group">
+        <h3>Language-Specific</h3>
+        <p class="doc-group-desc">Deep framework knowledge for each language ecosystem.</p>
+        <table class="doc-table">
+          <thead><tr><th>Language</th><th>Skills included</th></tr></thead>
+          <tbody>
+            <tr><td class="name">Python</td><td>python-patterns, python-testing, django-patterns, django-security, django-tdd, django-verification</td></tr>
+            <tr><td class="name">Go</td><td>golang-patterns, golang-testing</td></tr>
+            <tr><td class="name">Java</td><td>java-coding-standards, jpa-patterns, springboot-patterns, springboot-security, springboot-tdd, springboot-verification</td></tr>
+            <tr><td class="name">Swift</td><td>swiftui-patterns, swift-actor-persistence, swift-concurrency-6-2, swift-protocol-di-testing, liquid-glass-design, foundation-models-on-device</td></tr>
+            <tr><td class="name">C++</td><td>cpp-coding-standards, cpp-testing</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="doc-group">
+        <h3>AI &amp; Agentic</h3>
+        <p class="doc-group-desc">Patterns for building and operating AI-powered systems.</p>
+        <table class="doc-table">
+          <thead><tr><th>Skill</th><th>What it covers</th></tr></thead>
+          <tbody>
+            <tr><td class="name">agentic-engineering</td><td>Eval-first execution, decomposition, cost-aware model routing</td></tr>
+            <tr><td class="name">cost-aware-llm-pipeline</td><td>Model routing by task complexity, budget tracking, retry logic, prompt caching</td></tr>
+            <tr><td class="name">autonomous-loops</td><td>Sequential pipelines, NanoClaw REPL, infinite loops, continuous PR, RFC-driven DAG</td></tr>
+            <tr><td class="name">continuous-learning-v2</td><td>Instinct-based learning with confidence scoring and project scoping</td></tr>
+            <tr><td class="name">iterative-retrieval</td><td>Progressive context refinement to solve the subagent context problem</td></tr>
+            <tr><td class="name">agent-harness-construction</td><td>Design agent action spaces, tool definitions, and observation formatting</td></tr>
+            <tr><td class="name">eval-harness</td><td>Eval-driven development (EDD), pass@k metrics, capability and regression evals</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="doc-group">
+        <h3>Business &amp; Content</h3>
+        <table class="doc-table">
+          <thead><tr><th>Skill</th><th>What it covers</th></tr></thead>
+          <tbody>
+            <tr><td class="name">content-engine</td><td>Multi-platform content for X, LinkedIn, TikTok, YouTube, newsletters</td></tr>
+            <tr><td class="name">article-writing</td><td>Long-form content with voice consistency, structure, pacing</td></tr>
+            <tr><td class="name">investor-materials</td><td>Pitch decks, one-pagers, investor memos, accelerator applications</td></tr>
+            <tr><td class="name">investor-outreach</td><td>Cold emails, warm intros, follow-ups, update emails</td></tr>
+            <tr><td class="name">market-research</td><td>Competitive analysis, investor due diligence, industry intelligence</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Hooks -->
+  <section class="sec sec-alt" id="hooks">
+    <div class="w">
+      <div class="sec-label sec-label-violet">20 Hooks</div>
+      <h2>Automated quality gates</h2>
+      <p class="sec-desc">Hooks fire automatically before or after Claude uses tools. They format code, check types, block dangerous commands, and capture learning &mdash; all without you doing anything.</p>
+
+      <div class="doc-group">
+        <h3>Before tool execution (PreToolUse)</h3>
+        <p class="doc-group-desc">These run before Claude executes a command. Some warn, some block entirely.</p>
+        <div class="hook-grid">
+          <div class="hook-card">
+            <span class="hook-event hook-pre">PreToolUse &bull; BLOCKS</span>
+            <h4>Dev server blocker</h4>
+            <p>Blocks <code>npm run dev</code> and similar outside tmux, ensuring log access for dev servers.</p>
+          </div>
+          <div class="hook-card">
+            <span class="hook-event hook-pre">PreToolUse &bull; WARNS</span>
+            <h4>Tmux reminder</h4>
+            <p>Suggests tmux for long-running commands like <code>npm test</code>, <code>cargo build</code>, <code>docker</code>.</p>
+          </div>
+          <div class="hook-card">
+            <span class="hook-event hook-pre">PreToolUse &bull; WARNS</span>
+            <h4>Git push reminder</h4>
+            <p>Reminds you to review changes before <code>git push</code>.</p>
+          </div>
+          <div class="hook-card">
+            <span class="hook-event hook-pre">PreToolUse &bull; WARNS</span>
+            <h4>Doc file warning</h4>
+            <p>Warns about creating non-standard documentation files. Allows README, CLAUDE, CHANGELOG, etc.</p>
+          </div>
+          <div class="hook-card">
+            <span class="hook-event hook-pre">PreToolUse &bull; SUGGESTS</span>
+            <h4>Strategic compact</h4>
+            <p>Suggests manual <code>/compact</code> at logical intervals (~50 tool calls) to preserve context quality.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3>After tool execution (PostToolUse)</h3>
+        <p class="doc-group-desc">These run after edits, builds, and other tool calls. Mostly auto-formatting and quality checks.</p>
+        <div class="hook-grid">
+          <div class="hook-card">
+            <span class="hook-event hook-post">PostToolUse</span>
+            <h4>Prettier / Biome format</h4>
+            <p>Auto-formats JS/TS files after every edit. Auto-detects Biome or Prettier.</p>
+          </div>
+          <div class="hook-card">
+            <span class="hook-event hook-post">PostToolUse</span>
+            <h4>TypeScript type check</h4>
+            <p>Runs <code>tsc --noEmit</code> after editing .ts/.tsx files to catch type errors immediately.</p>
+          </div>
+          <div class="hook-card">
+            <span class="hook-event hook-post">PostToolUse</span>
+            <h4>console.log warning</h4>
+            <p>Warns about <code>console.log</code> statements left in edited files.</p>
+          </div>
+          <div class="hook-card">
+            <span class="hook-event hook-post">PostToolUse</span>
+            <h4>PR logger</h4>
+            <p>Logs PR URL and review command after <code>gh pr create</code>.</p>
+          </div>
+          <div class="hook-card">
+            <span class="hook-event hook-post">PostToolUse &bull; ASYNC</span>
+            <h4>Build analysis</h4>
+            <p>Background analysis after build commands. Non-blocking, 30s timeout.</p>
+          </div>
+          <div class="hook-card">
+            <span class="hook-event hook-post">PostToolUse &bull; ASYNC</span>
+            <h4>Quality gate</h4>
+            <p>Runs fast quality checks after file edits. Non-blocking, 30s timeout.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3>Session lifecycle (Stop / Start / Compact)</h3>
+        <div class="hook-grid">
+          <div class="hook-card">
+            <span class="hook-event hook-stop">Stop</span>
+            <h4>Console.log audit</h4>
+            <p>Checks all modified files for <code>console.log</code> at session end.</p>
+          </div>
+          <div class="hook-card">
+            <span class="hook-event hook-stop">Stop &bull; ASYNC</span>
+            <h4>Pattern extraction</h4>
+            <p>Evaluates the session for extractable patterns (continuous learning).</p>
+          </div>
+          <div class="hook-card">
+            <span class="hook-event hook-stop">Stop &bull; ASYNC</span>
+            <h4>Session summary</h4>
+            <p>Persists session state for continuity across restarts.</p>
+          </div>
+          <div class="hook-card">
+            <span class="hook-event hook-stop">PreCompact</span>
+            <h4>State saver</h4>
+            <p>Saves important state before context compaction so nothing is lost.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: 24px; padding: 16px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+        <strong style="color: var(--text);">Hook profiles:</strong> Control which hooks run via <code>ECC_HOOK_PROFILE=minimal|standard|strict</code>. Disable specific hooks with <code>ECC_DISABLED_HOOKS=hook-id-1,hook-id-2</code>.
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Rules -->
+  <section class="sec" id="rules">
+    <div class="w">
+      <div class="sec-label sec-label-blue">Rules</div>
+      <h2>Conventions that enforce themselves</h2>
+      <p class="sec-desc">Rules are loaded into context automatically based on file type. Common rules apply to all projects; language rules add framework-specific conventions on top.</p>
+
+      <div class="doc-group">
+        <h3>Common rules (all projects)</h3>
+        <p class="doc-group-desc">9 rule files covering universal development standards. Installed with every language.</p>
+        <div class="rule-grid">
+          <div class="rule-card">
+            <h4>coding-style</h4>
+            <ul>
+              <li>Immutability &mdash; new objects, never mutate</li>
+              <li>Small files (200-400 lines, 800 max)</li>
+              <li>Functions under 50 lines</li>
+              <li>No deep nesting (&gt;4 levels)</li>
+            </ul>
+          </div>
+          <div class="rule-card">
+            <h4>security</h4>
+            <ul>
+              <li>No hardcoded secrets</li>
+              <li>SQL injection prevention</li>
+              <li>XSS prevention</li>
+              <li>CSRF, rate limiting, auth checks</li>
+            </ul>
+          </div>
+          <div class="rule-card">
+            <h4>testing</h4>
+            <ul>
+              <li>80% minimum coverage</li>
+              <li>Unit + integration + E2E required</li>
+              <li>TDD workflow enforced</li>
+              <li>Fix implementation, not tests</li>
+            </ul>
+          </div>
+          <div class="rule-card">
+            <h4>git-workflow</h4>
+            <ul>
+              <li>Conventional commits format</li>
+              <li>Analyze full commit history for PRs</li>
+              <li>Comprehensive PR summaries</li>
+            </ul>
+          </div>
+          <div class="rule-card">
+            <h4>development-workflow</h4>
+            <ul>
+              <li>Research &amp; reuse first</li>
+              <li>Plan before coding</li>
+              <li>TDD approach mandatory</li>
+              <li>Code review after implementation</li>
+            </ul>
+          </div>
+          <div class="rule-card">
+            <h4>performance</h4>
+            <ul>
+              <li>Model selection (Haiku/Sonnet/Opus)</li>
+              <li>Context window management</li>
+              <li>Extended thinking usage</li>
+            </ul>
+          </div>
+          <div class="rule-card">
+            <h4>agents</h4>
+            <ul>
+              <li>When to use each agent</li>
+              <li>Parallel task execution</li>
+              <li>Multi-perspective analysis</li>
+            </ul>
+          </div>
+          <div class="rule-card">
+            <h4>patterns</h4>
+            <ul>
+              <li>Skeleton project workflow</li>
+              <li>Repository pattern</li>
+              <li>API response envelope format</li>
+            </ul>
+          </div>
+          <div class="rule-card">
+            <h4>hooks</h4>
+            <ul>
+              <li>Hook types and lifecycle</li>
+              <li>Auto-accept permissions</li>
+              <li>TodoWrite best practices</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-group">
+        <h3>Language-specific rules</h3>
+        <p class="doc-group-desc">Each language adds 5 rule files that extend or override common rules for framework-specific conventions.</p>
+        <table class="doc-table">
+          <thead><tr><th>Language</th><th>Install command</th><th>Key conventions</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="name">TypeScript</td>
+              <td><code>./install.sh typescript</code></td>
+              <td>Strict mode, no <code>any</code>, spread for immutability, Zod validation, async/await + try-catch, no console.log in production</td>
+            </tr>
+            <tr>
+              <td class="name">Python</td>
+              <td><code>./install.sh python</code></td>
+              <td>PEP 8, type hints everywhere, dataclasses, context managers, ruff + black + mypy, pytest patterns</td>
+            </tr>
+            <tr>
+              <td class="name">Go</td>
+              <td><code>./install.sh golang</code></td>
+              <td>Idiomatic Go, error handling patterns, interfaces, table-driven tests, golangci-lint, race detection</td>
+            </tr>
+            <tr>
+              <td class="name">Swift</td>
+              <td><code>./install.sh swift</code></td>
+              <td>SwiftFormat + SwiftLint, <code>let</code> over <code>var</code>, struct by default, typed throws (Swift 6+), Sendable, actors</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Stack examples -->
+  <section class="sec sec-alt" id="stacks">
+    <div class="w">
+      <div class="sec-label sec-label-green">Adapt to any stack</div>
       <h2>Four examples, infinite possibilities</h2>
-      <p>The default is Next.js + shadcn + Supabase. Here's how the same template adapts to completely different stacks.</p>
+      <p class="sec-desc">The default is Next.js + shadcn + Supabase. Here's how the same template adapts to completely different stacks.</p>
 
       <div class="stack-grid">
         <div class="stack-card">
@@ -545,21 +1171,18 @@
           <div class="stack-prompt">"This is the default. Just fill in your project name and start building."</div>
           <div class="stack-rules">Rules: <code>./install.sh typescript</code></div>
         </div>
-
         <div class="stack-card">
           <h3>Python + FastAPI + PostgreSQL</h3>
           <div class="stack-tech">SQLAlchemy 2.0, Pydantic v2, Alembic, uv, pytest</div>
           <div class="stack-prompt">"Update CLAUDE.md for a FastAPI project with PostgreSQL, SQLAlchemy, and Pydantic. Use uv as package manager."</div>
           <div class="stack-rules">Rules: <code>./install.sh python</code></div>
         </div>
-
         <div class="stack-card">
           <h3>Go + HTMX + SQLite</h3>
           <div class="stack-tech">stdlib net/http, Go templates, modernc.org/sqlite, goose</div>
           <div class="stack-prompt">"Reconfigure for a Go web app using stdlib, HTMX for the frontend, and SQLite with goose migrations."</div>
           <div class="stack-rules">Rules: <code>./install.sh golang</code></div>
         </div>
-
         <div class="stack-card">
           <h3>Rails 8 + Hotwire</h3>
           <div class="stack-tech">Turbo, Stimulus, Tailwind, PostgreSQL, Solid Queue</div>
@@ -573,14 +1196,13 @@
   <div class="divider"></div>
 
   <!-- File tree -->
-  <section class="tree-section">
+  <section class="sec">
     <div class="w">
-      <div class="tree-header">
-        <h2>What ships in the template</h2>
-        <p>Intentionally minimal. ECC handles the heavy lifting. These files are what ECC doesn't provide.</p>
-      </div>
+      <div class="sec-label">Template files</div>
+      <h2>What ships in the template</h2>
+      <p class="sec-desc">Intentionally minimal. ECC handles the heavy lifting. These files are what ECC doesn't provide.</p>
 <pre class="tree-block">
-<span class="d">claude-bootstrap-template/</span>
+<span class="d">claude-launchpad/</span>
 ├── <span class="f">CLAUDE.md</span>                          <span class="ann"># project memory — loaded every session</span>
 ├── <span class="f">TASKS.md</span>                           <span class="ann"># sprint tracker — read at session start</span>
 ├── <span class="f">.env.example</span>                       <span class="ann"># required environment variables</span>

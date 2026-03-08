@@ -1,4 +1,4 @@
-# Claude Code Bootstrap Template
+# Claude Launchpad
 
 A minimal project template for starting new Claude Code projects with the right structure from day one. Pairs with [Everything Claude Code (ECC)](https://github.com/affaan-m/everything-claude-code) for a production-grade agent toolkit — 16 agents, 65 skills, 40+ commands, and hooks out of the box.
 
@@ -10,7 +10,7 @@ This template provides the **project-specific layer** (memory, tasks, convention
 
 ```bash
 # 1. Clone the template
-git clone https://github.com/mboss37/claude-bootstrap-template.git my-project
+git clone https://github.com/mboss37/claude-launchpad.git my-project
 cd my-project
 
 # 2. Reset git history
@@ -33,6 +33,8 @@ claude
 Then tell Claude:
 
 > "Read CLAUDE.md and adapt it for my project. I'm building [describe your project] with [your stack]."
+
+> **Note:** Plugins are runtime extensions — they don't copy files into your project. After restarting Claude Code, all 16 agents, 65+ skills, 40+ commands, and 20 hooks are available automatically. You won't see them in `.claude/` — they live in `~/.claude/plugins/` and load at startup.
 
 ---
 

@@ -1,15 +1,25 @@
 # {{PROJECT_NAME}}
 
-<!-- TODO: Replace {{PROJECT_NAME}} with your project name and write a one-line description -->
+<!-- TODO: Replace {{PROJECT_NAME}} with your project name -->
+<!-- TODO: Write a one-line description of your project -->
+
+<!--
+  FIRST: Install the ECC plugin for agents, skills, hooks, and rules:
+  /plugin marketplace add affaan-m/everything-claude-code
+  /plugin install everything-claude-code@everything-claude-code
+  Then install rules: git clone https://github.com/affaan-m/everything-claude-code.git /tmp/ecc
+  cd /tmp/ecc && ./install.sh <language>  (typescript | python | golang | swift)
+-->
 
 ## Stack
-- **Framework**: Next.js 15 (App Router, Server Components, Server Actions)
-- **UI**: shadcn/ui + Tailwind CSS + Radix primitives
-- **Database**: Supabase (PostgreSQL) with Row Level Security
-- **Auth**: Supabase Auth (SSR helpers via `@supabase/ssr`)
-- **ORM**: Supabase client (no separate ORM — use typed queries via `supabase-js`)
-- **Package Manager**: pnpm
-- **Language**: TypeScript (strict mode)
+<!-- TODO: Define your tech stack. Example: -->
+<!-- - **Framework**: Next.js 15 / FastAPI / Go stdlib / Rails 8 -->
+<!-- - **UI**: shadcn/ui + Tailwind / HTMX / Hotwire -->
+<!-- - **Database**: Supabase / PostgreSQL / SQLite / MongoDB -->
+<!-- - **Auth**: Supabase Auth / NextAuth / JWT / Devise -->
+<!-- - **ORM**: Prisma / Drizzle / SQLAlchemy / supabase-js -->
+<!-- - **Package Manager**: pnpm / npm / uv / go modules / bundler -->
+<!-- - **Language**: TypeScript / Python / Go / Ruby -->
 
 ## Session Start
 - ALWAYS read @TASKS.md first — it tracks progress across sessions
@@ -17,81 +27,56 @@
 - Update TASKS.md as you complete work (move tasks, append to session log)
 
 ## Architecture
-- Full-stack monorepo — Next.js handles both frontend and API (Route Handlers + Server Actions)
-- Supabase for auth, database, storage, and realtime — no custom backend needed
-- Server Components by default; Client Components only when interactivity requires it
-- RLS policies enforce authorization at the database layer, not in application code
-- Edge-compatible where possible (middleware, API routes)
+<!-- TODO: Describe your high-level architecture in 3-5 bullet points -->
+<!-- Example: -->
+<!-- - Full-stack monorepo — Next.js handles frontend + API -->
+<!-- - Supabase for auth, database, storage, and realtime -->
+<!-- - Server Components by default; Client Components only for interactivity -->
+<!-- - RLS policies enforce authorization at the database layer -->
 
 ## Commands
-- Dev server: `pnpm dev`
-- Build: `pnpm build`
-- Lint: `pnpm lint`
-- Format: `pnpm format`
-- Test: `pnpm test`
-- Type check: `pnpm tsc --noEmit`
-- Supabase local: `pnpm supabase start`
-- Supabase migrations: `pnpm supabase db push`
-- Generate types: `pnpm supabase gen types typescript --local > src/lib/database.types.ts`
+<!-- TODO: Fill in the commands for your project -->
+<!-- - Dev server: `pnpm dev` -->
+<!-- - Build: `pnpm build` -->
+<!-- - Test: `pnpm test` -->
+<!-- - Lint: `pnpm lint` -->
+<!-- - Format: `pnpm format` -->
+<!-- - Type check: `pnpm tsc --noEmit` -->
+<!-- - DB migrate: `pnpm supabase db push` -->
 
 ## Project Structure
+<!-- TODO: Define your project structure -->
 ```
-├── src/
-│   ├── app/                    # Next.js App Router pages and layouts
-│   │   ├── (auth)/             # Auth route group (login, signup, callback)
-│   │   ├── (dashboard)/        # Protected route group
-│   │   ├── api/                # Route Handlers
-│   │   ├── layout.tsx          # Root layout
-│   │   └── page.tsx            # Landing page
-│   ├── components/
-│   │   ├── ui/                 # shadcn/ui components (DO NOT edit manually)
-│   │   └── ...                 # App-specific components
-│   ├── lib/
-│   │   ├── supabase/
-│   │   │   ├── client.ts       # Browser client
-│   │   │   ├── server.ts       # Server client (cookies-based)
-│   │   │   └── middleware.ts   # Middleware client (for auth refresh)
-│   │   ├── database.types.ts   # Generated Supabase types
-│   │   └── utils.ts            # Shared utilities (cn, etc.)
-│   ├── hooks/                  # Custom React hooks
-│   └── types/                  # App-wide TypeScript types
-├── supabase/
-│   ├── migrations/             # SQL migrations (sequential, never edit old ones)
-│   ├── seed.sql                # Development seed data
-│   └── config.toml             # Supabase local config
-├── public/                     # Static assets
-├── tests/                      # Test files
+├── src/                     # Source code
+├── tests/                   # Tests
+├── docs/                    # Documentation (if needed)
 └── ...
 ```
 
 ## Conventions
 - Git: Conventional commits (`feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`)
-- TypeScript: Strict mode, no `any` types, prefer `unknown` for untyped data
-- Components: Named exports, one component per file, colocate styles/tests
-- shadcn/ui: Install via `pnpm dlx shadcn@latest add <component>` — never edit `components/ui/` directly
-- Supabase queries: Always use generated types from `database.types.ts`
-- API responses: Use Next.js conventions (`NextResponse.json()`) with consistent `{ data, error }` shape
-- Database: UUIDs for PKs, `snake_case` columns, `created_at`/`updated_at` timestamps on every table
-- RLS: Every table must have RLS enabled with explicit policies before use
-- Server Actions: Prefer over Route Handlers for mutations; validate with Zod
-- Imports: Use `@/` path alias for `src/`
+<!-- TODO: Add your project-specific conventions. Examples: -->
+<!-- - TypeScript: Strict mode, no `any` types -->
+<!-- - Components: Named exports, one component per file -->
+<!-- - API responses: `{ data, error }` shape -->
+<!-- - Database: UUIDs for PKs, snake_case columns, created_at/updated_at -->
+<!-- - Imports: Use `@/` path alias -->
+
+## Workflow (ECC Skills)
+- New feature: `/plan` first, then `/tdd` to implement
+- After writing code: `/code-review` and `/security-scan` before committing
+- Verification: `/verify` runs build + lint + tests in one command
+- End of session: update TASKS.md with progress
+- Extract patterns: `/learn-eval` to save reusable patterns from session
 
 ## Off-Limits
 - Never hardcode secrets — use environment variables
 - Never write to `.env` files
 - Never expose internal error details in API responses
-- Never bypass RLS — all client queries go through policies
-- Never use `supabaseAdmin` (service role) in client-side code
-- Never edit files in `components/ui/` — use shadcn CLI to update
-- Never store auth tokens manually — `@supabase/ssr` handles cookies
-
-## Workflow (ECC Skills)
-- New feature: `/plan` first, then `/tdd` to implement
-- After writing code: `/security-scan` before committing
-- End of session: update TASKS.md with progress
-- Debugging: use the debugger agent for systematic diagnosis
-- Code review: use the code-reviewer agent after implementation
-- Extract patterns: `/learn-eval` to save reusable patterns from session
+<!-- TODO: Add project-specific guardrails. Examples: -->
+<!-- - Never bypass RLS — all client queries go through policies -->
+<!-- - Never use service role key in client-side code -->
+<!-- - Never edit files in `components/ui/` — use CLI to update -->
 
 ## Key Decisions
 <!-- TODO: Record architectural decisions as you make them -->
