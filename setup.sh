@@ -560,9 +560,10 @@ print_step "Cleaning up template files..."
 
 rm -f LICENSE
 rm -f README.md
+rm -rf docs/
 rm -f setup.sh
 
-print_success "Removed template files (setup.sh, README.md, LICENSE)"
+print_success "Removed template files (setup.sh, README.md, LICENSE, docs/)"
 
 # ─── Generate .claude/settings.json ───
 mkdir -p .claude

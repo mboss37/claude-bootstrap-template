@@ -32,7 +32,7 @@ The setup script will:
 
 ### After setup
 
-Install language-specific rules:
+Install language-specific rules from the ECC repo:
 
 ```bash
 git clone https://github.com/affaan-m/everything-claude-code.git /tmp/ecc
